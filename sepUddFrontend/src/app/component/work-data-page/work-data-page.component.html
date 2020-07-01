@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-3"></div>
+        <div class="col-md-6">
+            <form name="workDataForm" #f="ngForm" (submit)="submitWorkData()"  novalidate class="form-signin">
+
+              <h2 class="form-text">Work data</h2>
+
+              <br>
+
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text"
+                       id="title"
+                       class="form-control"
+                       name="title"
+                       placeholder="Title" [(ngModel)]="workData.title" />
+              </div>
+
+
+              <div class="form-group">
+                <label for="abstract">Abstract</label>
+                <input type="text"
+                       id="abstract"
+                       class="form-control"
+                       name="abstract"
+                       placeholder="Abstract" [(ngModel)]="workData.abstr" />
+              </div>
+
+              <div class="form-group">
+                <label for="scientificField">Scientific field</label>
+                <input type="text"
+                       id="scientificField"
+                       class="form-control"
+                       name="scientificField"
+                       placeholder="Science field" [(ngModel)]="workData.scientificField" />
+              </div>
+
+              <div class="form-group">
+                <input type="file" accept="application/pdf"  (change)="fileChooserListener($event.target.files, workData.file)">
+              </div>
+
+
+
+              <!--<div *ngFor="let field of formFields">-->
+                    <!--<div class="form-group">-->
+
+                        <!--<label> {{field['label']}} </label>-->
+
+                        <!--<input type="text" class="form-control" name={{field.id}} ngModel *ngIf="field.type.name=='string'" />-->
+                        <!--<input type="checkbox"  name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">-->
+                        <!--<input type="number" class="form-control" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">-->
+                        <!--<select [(ngModel)]="choosenScientificField" name="scientificFieldName" class="form-control" *ngIf="field.type.name=='enum'">-->
+                            <!--<option *ngFor="let val of enumValues" value={{val}}>-->
+                                <!--{{val}}-->
+                            <!--</option>-->
+                        <!--</select>-->
+                        <!--<input  *ngIf="field.properties.type == 'file'"  type="file" accept="application/pdf"  (change)="fileChoserListener($event.target.files, field)">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+              <br>
+
+                <button type="submit"  class="btn btn-primary btn-sm pull-right">
+                    <i class="fa fa-envelope-o"></i>
+                    <span> Submit</span>
+                </button>
+            </form>
+        </div>
+        <div class="offset-3"></div>
+    </div>
+</div>
