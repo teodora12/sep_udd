@@ -1,5 +1,7 @@
 package com.ftn.sep_udd.model;
 
+import com.ftn.sep_udd.dto.WorkDataDTO;
+import com.ftn.sep_udd.dto.WorkEsDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +17,7 @@ public class Work implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column
     private String title;
@@ -38,5 +40,16 @@ public class Work implements Serializable {
     public Work() {
         this.keyTerms = new HashSet<>();
         this.users = new HashSet<>();
+    }
+
+
+    public Work(WorkDataDTO workDataDTO){
+        this.title = workDataDTO.getTitle();
+        this.abstr = workDataDTO.getTitle();
+        this.pdf = workDataDTO.getFileName();
+        ScientificField scientificField = new ScientificField();
+        scientificField.setName(workDataDTO.getScientificField());
+        //Set<KeyTerm> keyTerms = new HashSet<>();
+
     }
 }

@@ -8,6 +8,8 @@ public class ScientificFieldDTO {
     private Long id;
     private String name;
 
+    public ScientificFieldDTO(){}
+
     public ScientificFieldDTO(Long id, String name) {
         this.id = id;
         this.name = name;

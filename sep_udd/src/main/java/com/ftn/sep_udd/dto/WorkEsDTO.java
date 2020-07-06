@@ -4,16 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class WorkDataDTO {
+public class WorkEsDTO {
 
     private String title;
     private String journalTitle;
     private String abstr;
     private String scientificField;
-    private String file;
-    private String fileName;
+    private String pdf;
+    private String text;
     private String keyTerms;
 
-    public WorkDataDTO() {}
-
+    public WorkEsDTO() {
+    }
 }
