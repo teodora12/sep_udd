@@ -10,13 +10,17 @@ import {LoginPageComponent} from './component/login-page/login-page.component';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WorkDataPageComponent} from './component/work-data-page/work-data-page.component';
+import { SearchPageComponent } from './component/search-page/search-page.component';
+import { ChooseSearchTypeComponent } from './component/choose-search-type/choose-search-type.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginPageComponent,
-    WorkDataPageComponent
+    WorkDataPageComponent,
+    SearchPageComponent,
+    ChooseSearchTypeComponent
   ],
   imports: [
     BrowserModule,

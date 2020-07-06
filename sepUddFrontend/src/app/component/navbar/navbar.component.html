@@ -21,6 +21,9 @@
 
             </li>
             <li  class="nav-item active" >
+              <a class="nav-link" routerLink="searchType" *ngIf="userRole === ''" >Search </a>
+            </li>
+            <li  class="nav-item active" >
                 <a class="nav-link" *ngIf="userRole !== ''" (click)="logout()">Log out </a>
             </li>
 

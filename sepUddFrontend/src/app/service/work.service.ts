@@ -13,4 +13,13 @@ export class WorkService {
     return this.http.post('api/works/submitWorkData', workData);
   }
 
+  search(search, phrase, caregory): any {
+    return this.http.get('api/search/');
+  }
+
+  getScientificFields(): any {
+    return this.http.get('api/works/getScientificFields');
+  }
+
+
 }
