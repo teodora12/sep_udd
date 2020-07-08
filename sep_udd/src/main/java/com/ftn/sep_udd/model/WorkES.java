@@ -32,14 +32,15 @@ public class WorkES {
     private String scientificField;
 
     @Field(type = FieldType.Text, searchAnalyzer = "serbian",analyzer = "serbian")
-    private String pdf;
+    private String pdfLocation;
 
     @Field(type = FieldType.Text, searchAnalyzer = "serbian",analyzer = "serbian")
-    private String pdfName;
+    private String text;
 
     @Field(type = FieldType.Text, searchAnalyzer = "serbian",analyzer = "serbian")
     private String keyTerms;
 
-//    private String users;
+    @Field(type = FieldType.Text, store = true)
+    private String authors;
 
 }

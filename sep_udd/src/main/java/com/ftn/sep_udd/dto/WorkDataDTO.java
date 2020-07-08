@@ -13,6 +13,7 @@ public class WorkDataDTO {
     private String file;
     private String fileName;
     private String keyTerms;
+    private String authors;
 
     public WorkDataDTO() {}
 

@@ -6,13 +6,15 @@ import lombok.Setter;
 @Getter @Setter
 public class WorkEsDTO {
 
+    private Integer id;
     private String title;
     private String journalTitle;
     private String abstr;
-    private String scientificField;
-    private String pdf;
-    private String text;
     private String keyTerms;
+    private String scientificField;
+    private String authors;
+    private String highlight;
+//    private boolean openAccess;
 
     public WorkEsDTO() {
     }

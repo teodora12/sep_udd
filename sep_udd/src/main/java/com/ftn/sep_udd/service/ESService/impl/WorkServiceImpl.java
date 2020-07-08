@@ -43,13 +43,10 @@ public class WorkServiceImpl implements WorkService {
             fop.flush();
             fop.close();
 
-            // sacuvaj pdf u resources folderu
-//            Files.deleteIfExists(this.storageLocation.resolve(rad.getPdfName()));
-//            Files.copy(file.getInputStream(), this.storageLocation.resolve(rad.getPdfName()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        return workRepository.save(new Work(dto));
+
     }
 
 }
