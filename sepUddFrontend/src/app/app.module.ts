@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WorkDataPageComponent} from './component/work-data-page/work-data-page.component';
 import { SearchPageComponent } from './component/search-page/search-page.component';
 import { ChooseSearchTypeComponent } from './component/choose-search-type/choose-search-type.component';
+import { AdvancedSearchComponent } from './component/choose-search-type/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ChooseSearchTypeComponent } from './component/choose-search-type/choose
     LoginPageComponent,
     WorkDataPageComponent,
     SearchPageComponent,
-    ChooseSearchTypeComponent
+    ChooseSearchTypeComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,

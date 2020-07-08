@@ -6,6 +6,7 @@ import {LoginPageComponent} from './component/login-page/login-page.component';
 import {WorkDataPageComponent} from './component/work-data-page/work-data-page.component';
 import {SearchPageComponent} from './component/search-page/search-page.component';
 import {ChooseSearchTypeComponent} from './component/choose-search-type/choose-search-type.component';
+import {AdvancedSearchComponent} from "./component/choose-search-type/advanced-search/advanced-search.component";
 
 
 
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent},
   { path: 'workData', component: WorkDataPageComponent},
   { path: 'search/:searchType', component: SearchPageComponent},
-  { path: 'searchType', component: ChooseSearchTypeComponent}
+  { path: 'searchType', component: ChooseSearchTypeComponent},
+  { path: 'advancedSearch', component: AdvancedSearchComponent}
 
 ];
 

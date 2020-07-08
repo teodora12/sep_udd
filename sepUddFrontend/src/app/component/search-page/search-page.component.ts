@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WorkService} from '../../service/work.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -25,12 +25,13 @@ export class SearchPageComponent implements OnInit {
   private authors = "";
   private keyTerms = "";
   private scientificFields = "";
-  private abstr = "";
+  private text = "";
+  private sf = "";
 
   constructor(private workService: WorkService, private route: ActivatedRoute) {
 
 
-    this.route.params.subscribe( params => {
+    this.route.params.subscribe(params => {
       this.searchType = params.searchType;
     });
 
@@ -45,18 +46,18 @@ export class SearchPageComponent implements OnInit {
     this.showResults = false;
 
     this.workService.getScientificFields().subscribe(
-      res=>{
+      res => {
         console.log(res);
         this.scientificFieldsList = res;
       },
-      error=>{
+      error => {
         console.log(error);
       }
     );
 
   }
 
-  createForm(){
+  createForm() {
     this.searchForm = new FormGroup({
       journalTitle: new FormControl(''),
       title: new FormControl(''),
@@ -95,25 +96,25 @@ export class SearchPageComponent implements OnInit {
   // }
 
   search() {
-    if(this.searchType == 1){
+    if (this.searchType == 1) {
 
       let phrase = 0;
-      if(this.phraseChecked){
+      if (this.phraseChecked) {
         phrase = 1;
       }
 
       this.workService.search(this.journalTitle, phrase, "journalTitle").subscribe(
-        res=>{
+        res => {
           console.log(res);
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )
 
-    } else if(this.searchType == 2){
+    } else if (this.searchType == 2) {
 
       let phrase = 0;
       if (this.phraseChecked) {
@@ -121,17 +122,17 @@ export class SearchPageComponent implements OnInit {
       }
 
       this.workService.search(this.title, phrase, "title").subscribe(
-        res=>{
+        res => {
           console.log(res);
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )
 
-    } else if(this.searchType == 3) {
+    } else if (this.searchType == 3) {
 
       let phrase = 0;
       if (this.phraseChecked) {
@@ -139,17 +140,17 @@ export class SearchPageComponent implements OnInit {
       }
 
       this.workService.search(this.authors, phrase, "authors").subscribe(
-        res=>{
+        res => {
           console.log(res);
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )
 
-    } else if(this.searchType == 4) {
+    } else if (this.searchType == 4) {
 
       let phrase = 0;
       if (this.phraseChecked) {
@@ -157,12 +158,12 @@ export class SearchPageComponent implements OnInit {
       }
 
       this.workService.search(this.keyTerms, phrase, "keyTerms").subscribe(
-        res=>{
+        res => {
           console.log(res);
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )
@@ -174,13 +175,13 @@ export class SearchPageComponent implements OnInit {
         phrase = 1;
       }
 
-      this.workService.search(this.abstr, phrase, "abstr").subscribe(
-        res=>{
+      this.workService.search(this.text, phrase, 'text').subscribe(
+        res => {
           console.log(res);
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )
@@ -189,25 +190,25 @@ export class SearchPageComponent implements OnInit {
 
       let temp = "";
 
-      for(let i=0; i<this.scientificFields.length; i++){
-        temp = temp.concat(this.scientificFields[i]);
+      for (let i = 0; i < this.scientificFieldsList.length; i++) {
+        temp = temp.concat(this.scientificFields);
         temp = temp.concat(', ');
       }
 
-      if(temp == ""){
+      if (temp == "") {
         alert("Odaberite naucne oblasti");
         return;
       }
 
-      temp = temp.substring(0,temp.length-1);
+      temp = temp.substring(0, temp.length - 1);
       console.log(temp);
 
       this.workService.search(temp, 0, "scientificField").subscribe(
-        res=>{
+        res => {
           this.works = res;
           this.showResults = true;
         },
-        error=>{
+        error => {
           console.log(error);
         }
       )

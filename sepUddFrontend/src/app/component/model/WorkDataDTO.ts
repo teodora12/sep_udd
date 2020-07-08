@@ -7,6 +7,7 @@ export class WorkDataDTO {
   public file: string;
   public fileName: string;
   public keyTerms: string;
+  public authors: string;
 
   constructor(
   ) {
