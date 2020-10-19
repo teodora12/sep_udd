@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class SepUddApplication {
 
     @Bean
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
 

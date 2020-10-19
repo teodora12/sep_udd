@@ -49,7 +49,8 @@ public class WorkController {
     }
 
     @GetMapping(path = "/downloadWork/get/{id}")
-    public @ResponseBody ResponseEntity downloadRad(@PathVariable Integer id) throws IOException {
+    public @ResponseBody
+    ResponseEntity downloadRad(@PathVariable Integer id) throws IOException {
 
         Work work = workService.findWorkById(id);
 
@@ -60,7 +61,7 @@ public class WorkController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/pdf"))
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""  + "rad.pdf\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "rad.pdf\"")
                 .body(new ByteArrayResource(bytes));
     }
 
@@ -179,83 +180,83 @@ public class WorkController {
     public ResponseEntity advancedSearch(@RequestBody CombinedSearchDTO dto) throws JsonProcessingException {
 
 
-        String must = "\"must\" : [\n" ;
+        String must = "\"must\" : [\n";
         String should = "\"should\" : [\n";
         String fraza = "";
 
         boolean shouldBe = false;
         boolean mustBe = false;
 
-        if(dto.isPhraseJournalTitle()){
+        if (dto.isPhraseJournalTitle()) {
             fraza = "match_phrase";
-        }else{
+        } else {
             fraza = "match";
         }
-        if(dto.isJournalTitleChecked() && !dto.getJournalTitle().equals("")){
-            must += "{ \"" + fraza + "\" : { \"journalTitle\" : \""+dto.getJournalTitle()+"\" } },";
+        if (dto.isJournalTitleChecked() && !dto.getJournalTitle().equals("")) {
+            must += "{ \"" + fraza + "\" : { \"journalTitle\" : \"" + dto.getJournalTitle() + "\" } },";
             mustBe = true;
-        }else if(!dto.isJournalTitleChecked() && !dto.getJournalTitle().equals("")){
-            should += "{ \"" + fraza + "\" : { \"journalTitle\" : \""+dto.getJournalTitle()+"\" } },";
+        } else if (!dto.isJournalTitleChecked() && !dto.getJournalTitle().equals("")) {
+            should += "{ \"" + fraza + "\" : { \"journalTitle\" : \"" + dto.getJournalTitle() + "\" } },";
             shouldBe = true;
         }
 
-        if(dto.isPhraseTitle()){
+        if (dto.isPhraseTitle()) {
             fraza = "match_phrase";
-        }else{
+        } else {
             fraza = "match";
         }
-        if(dto.isTitleChecked() && !dto.getTitle().equals("")){
-            must += "{ \"" + fraza + "\" : { \"title\" : \""+dto.getTitle()+"\" } },";
+        if (dto.isTitleChecked() && !dto.getTitle().equals("")) {
+            must += "{ \"" + fraza + "\" : { \"title\" : \"" + dto.getTitle() + "\" } },";
             mustBe = true;
 
-        }else if(!dto.isTitleChecked() && !dto.getTitle().equals("")){
-            should += "{ \"" + fraza + "\" : { \"title\" : \""+dto.getTitle()+"\" } },";
+        } else if (!dto.isTitleChecked() && !dto.getTitle().equals("")) {
+            should += "{ \"" + fraza + "\" : { \"title\" : \"" + dto.getTitle() + "\" } },";
             shouldBe = true;
         }
 
-        if(dto.isPhraseKeyTerms()){
+        if (dto.isPhraseKeyTerms()) {
             fraza = "match_phrase";
-        }else{
+        } else {
             fraza = "match";
         }
-        if(dto.isKeyTermsChecked() && !dto.getKeyTerms().equals("")){
-            must += "{ \"" + fraza + "\" : { \"keyTerms\" : \""+dto.getKeyTerms()+"\" } },";
+        if (dto.isKeyTermsChecked() && !dto.getKeyTerms().equals("")) {
+            must += "{ \"" + fraza + "\" : { \"keyTerms\" : \"" + dto.getKeyTerms() + "\" } },";
             mustBe = true;
 
-        }else if(!dto.isKeyTermsChecked() && !dto.getKeyTerms().equals("")){
-            should += "{ \"" + fraza + "\" : { \"keyTerms\" : \""+dto.getKeyTerms()+"\" } },";
+        } else if (!dto.isKeyTermsChecked() && !dto.getKeyTerms().equals("")) {
+            should += "{ \"" + fraza + "\" : { \"keyTerms\" : \"" + dto.getKeyTerms() + "\" } },";
             shouldBe = true;
         }
 
-        if(dto.isPhraseAuthors()){
+        if (dto.isPhraseAuthors()) {
             fraza = "match_phrase";
-        }else{
+        } else {
             fraza = "match";
         }
-        if(dto.isAuthorsChecked() && !dto.getAuthors().equals("")){
-            must += "{ \"" + fraza + "\" : { \"authors\" : \""+dto.getAuthors()+"\" } },";
+        if (dto.isAuthorsChecked() && !dto.getAuthors().equals("")) {
+            must += "{ \"" + fraza + "\" : { \"authors\" : \"" + dto.getAuthors() + "\" } },";
             mustBe = true;
 
-        }else if(!dto.isAuthorsChecked() && !dto.getAuthors().equals("")){
-            should += "{ \"" + fraza + "\" : { \"authors\" : \""+dto.getAuthors()+"\" } },";
+        } else if (!dto.isAuthorsChecked() && !dto.getAuthors().equals("")) {
+            should += "{ \"" + fraza + "\" : { \"authors\" : \"" + dto.getAuthors() + "\" } },";
             shouldBe = true;
         }
 
-        if(dto.isPhraseText()){
+        if (dto.isPhraseText()) {
             fraza = "match_phrase";
-        }else{
+        } else {
             fraza = "match";
         }
-        if(dto.isTextChecked() && !dto.getText().equals("")){
-            must += "{ \"" + fraza + "\" : { \"abstr\" : \""+dto.getText()+"\" } },";
+        if (dto.isTextChecked() && !dto.getText().equals("")) {
+            must += "{ \"" + fraza + "\" : { \"abstr\" : \"" + dto.getText() + "\" } },";
             mustBe = true;
 
-        }else if(!dto.isTextChecked() && !dto.getText().equals("")){
-            should += "{ \"" + fraza + "\" : { \"abstr\" : \""+dto.getText()+"\" } },";
+        } else if (!dto.isTextChecked() && !dto.getText().equals("")) {
+            should += "{ \"" + fraza + "\" : { \"abstr\" : \"" + dto.getText() + "\" } },";
             shouldBe = true;
         }
-        must = must.substring(0,  must.length() - 1);
-        should = should.substring(0,should.length()-1);
+        must = must.substring(0, must.length() - 1);
+        should = should.substring(0, should.length() - 1);
 
         must += "],";
         should += "],";
@@ -263,11 +264,11 @@ public class WorkController {
         String query = "{\n" +
                 "  \"query\": {\n" +
                 "    \"bool\" : {\n";
-        if(mustBe){
+        if (mustBe) {
             query += must;
         }
 
-        if(shouldBe){
+        if (shouldBe) {
             query += should;
         }
 
@@ -292,7 +293,7 @@ public class WorkController {
                 "               \t\"type\":\"plain\"\n" +
                 "}\n" +
                 "        }\n" +
-                "    }"+
+                "    }" +
                 "}";
 
 
@@ -312,11 +313,11 @@ public class WorkController {
 //        return ResponseEntity.ok().build();
     }
 
-    public List<WorkEsDTO> getWorkEsDTOAdvanced(JsonNode node){
+    public List<WorkEsDTO> getWorkEsDTOAdvanced(JsonNode node) {
 
-        List<WorkEsDTO> retVal=new ArrayList<>();
+        List<WorkEsDTO> retVal = new ArrayList<>();
 
-        for(int i=0;i<node.size();i++){
+        for (int i = 0; i < node.size(); i++) {
 
             WorkEsDTO workEsDTO = new WorkEsDTO();
 
@@ -334,12 +335,12 @@ public class WorkController {
 
             String highText = node.get(i).path("highlight").toString();
 
-            highText = highText.replace("\"","");
-            highText = highText.replace("{","...");
-            highText = highText.replace("}","...");
-            highText = highText.replace("["," ");
-            highText = highText.replace("]"," ");
-            highText = highText.replace("\\r\\n","...");
+            highText = highText.replace("\"", "");
+            highText = highText.replace("{", "...");
+            highText = highText.replace("}", "...");
+            highText = highText.replace("[", " ");
+            highText = highText.replace("]", " ");
+            highText = highText.replace("\\r\\n", "...");
             workEsDTO.setHighlight(highText);
 
             retVal.add(workEsDTO);
@@ -347,7 +348,6 @@ public class WorkController {
         return retVal;
 
     }
-
 
 
 }

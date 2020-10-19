@@ -3,7 +3,8 @@ package com.ftn.sep_udd.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class WorkDataDTO {
 
     private String title;
@@ -15,6 +16,7 @@ public class WorkDataDTO {
     private String keyTerms;
     private String authors;
 
-    public WorkDataDTO() {}
+    public WorkDataDTO() {
+    }
 
 }

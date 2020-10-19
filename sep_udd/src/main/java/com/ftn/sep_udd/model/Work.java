@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @Table
 @Entity(name = "WORK")
 public class Work implements Serializable {
@@ -42,7 +43,7 @@ public class Work implements Serializable {
     }
 
 
-    public Work(WorkDataDTO workDataDTO){
+    public Work(WorkDataDTO workDataDTO) {
         this.title = workDataDTO.getTitle();
         this.abstr = workDataDTO.getAbstr();
         this.pdf = workDataDTO.getFileName();

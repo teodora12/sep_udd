@@ -3,7 +3,8 @@ package com.ftn.sep_udd.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class CombinedSearchDTO {
 
     private String journalTitle;
@@ -25,6 +26,7 @@ public class CombinedSearchDTO {
     private boolean phraseKeyTerms;
     private boolean phraseText;
 
-    public CombinedSearchDTO(){}
+    public CombinedSearchDTO() {
+    }
 
 }

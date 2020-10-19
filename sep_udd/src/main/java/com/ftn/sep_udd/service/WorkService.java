@@ -13,7 +13,9 @@ import java.nio.file.Files;
 public interface WorkService {
 
     Work findWorkById(Integer id);
+
     Work saveWork(Work work);
+
     public void savePdf(WorkDataDTO work);
 
 

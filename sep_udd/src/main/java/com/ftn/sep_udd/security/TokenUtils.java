@@ -89,7 +89,7 @@ public class TokenUtils {
     // Functions for validating JWT token data
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-    //    User user = (User) userDetails;
+        //    User user = (User) userDetails;
         User user = (User) userDetails;
         final String username = getUsernameFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);

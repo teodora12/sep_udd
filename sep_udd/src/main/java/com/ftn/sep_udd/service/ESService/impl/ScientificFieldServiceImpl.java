@@ -23,7 +23,7 @@ public class ScientificFieldServiceImpl implements ScientificFieldService {
         List<ScientificFieldDTO> dtos = new ArrayList<>();
         List<ScientificField> scientificFields = this.scientificFieldRepository.findAll();
 
-        for(ScientificField scientificField: scientificFields){
+        for (ScientificField scientificField : scientificFields) {
             ScientificFieldDTO dto = new ScientificFieldDTO(scientificField);
             dtos.add(dto);
         }

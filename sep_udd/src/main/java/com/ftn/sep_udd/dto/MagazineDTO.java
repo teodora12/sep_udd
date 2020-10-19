@@ -9,7 +9,7 @@ public class MagazineDTO {
     private String title;
     private List<ScientificFieldDTO> scientificFields;
 
-    public MagazineDTO(){
+    public MagazineDTO() {
         this.scientificFields = new ArrayList<>();
     }
 

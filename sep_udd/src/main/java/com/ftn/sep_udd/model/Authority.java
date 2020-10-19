@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity(name = "AUTHORITY")
 public class Authority implements GrantedAuthority {
 
-    private  static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column

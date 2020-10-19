@@ -16,9 +16,9 @@ import java.util.List;
 
 @Entity
 @Table
-public class User implements Serializable,UserDetails{
+public class User implements Serializable, UserDetails {
 
-    private  static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,10 +78,10 @@ public class User implements Serializable,UserDetails{
         this.authorities = new ArrayList<>();
     }
 
-    public User(List<FormSubmissionDTO> registrationData){
+    public User(List<FormSubmissionDTO> registrationData) {
 
         List<ScientificField> fields = new ArrayList<>();
-        for(FormSubmissionDTO dto : registrationData) {
+        for (FormSubmissionDTO dto : registrationData) {
 
             if (dto.getFieldId().equals("name")) {
                 this.name = dto.getFieldValue();
@@ -154,7 +154,7 @@ public class User implements Serializable,UserDetails{
     }
 
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -219,7 +219,6 @@ public class User implements Serializable,UserDetails{
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 
     @Override
