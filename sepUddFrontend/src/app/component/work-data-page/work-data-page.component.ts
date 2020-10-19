@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {WorkDataDTO} from '../model/WorkDataDTO';
@@ -32,14 +32,14 @@ export class WorkDataPageComponent implements OnInit {
     this.workData.fileName = this.fileName.toString();
     console.log(this.workData.fileName + ' FILE NAME !');
 
-    this.workService.submitWorkData(this.workData).subscribe( res => {
-          console.log(res);
-          this.toastr.successToastr('Success!');
+    this.workService.submitWorkData(this.workData).subscribe(res => {
+        console.log(res);
+        this.toastr.successToastr('Success!');
 
 
-        }, err => {
-          this.toastr.errorToastr("Greska");
-        }
+      }, err => {
+        this.toastr.errorToastr("Greska");
+      }
     );
   }
 

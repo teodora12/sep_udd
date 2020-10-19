@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
 
@@ -7,7 +7,8 @@ import {Observable} from "rxjs";
 })
 export class WorkService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
   submitWorkData(workData): any {
@@ -29,9 +30,9 @@ export class WorkService {
   downloadWork(id: any) {
 
     const httpOptions = {
-      'responseType'  : 'arraybuffer' as 'json'
+      'responseType': 'arraybuffer' as 'json'
     };
     return this.http.get('api/works/downloadWork/get/' + id, httpOptions) as Observable<any>;
-    
+
   }
 }

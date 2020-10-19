@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -10,9 +10,9 @@ import {LoginPageComponent} from './component/login-page/login-page.component';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WorkDataPageComponent} from './component/work-data-page/work-data-page.component';
-import { SearchPageComponent } from './component/search-page/search-page.component';
-import { ChooseSearchTypeComponent } from './component/choose-search-type/choose-search-type.component';
-import { AdvancedSearchComponent } from './component/choose-search-type/advanced-search/advanced-search.component';
+import {SearchPageComponent} from './component/search-page/search-page.component';
+import {ChooseSearchTypeComponent} from './component/choose-search-type/choose-search-type.component';
+import {AdvancedSearchComponent} from './component/choose-search-type/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -35,4 +35,5 @@ import { AdvancedSearchComponent } from './component/choose-search-type/advanced
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

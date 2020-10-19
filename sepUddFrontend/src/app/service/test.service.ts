@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -6,10 +6,11 @@ import {HttpClient} from '@angular/common/http';
 })
 export class TestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   testt() {
-    return this.http.get( 'api/test/get/');
+    return this.http.get('api/test/get/');
   }
 
 }

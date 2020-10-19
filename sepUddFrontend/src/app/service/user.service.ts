@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 // import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
@@ -13,60 +13,61 @@ import {Router} from '@angular/router';
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private router: Router) {  }
-
-  login(user): any {
-      return this.http.post('api/auth/login', user, {observe: 'response'}).pipe(map(response => response));
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-    getToken(): string {
-        const currentUser = JSON.parse(localStorage.getItem('loggedUser'));
-        if (currentUser !== null) {
-            currentUser.token = currentUser.token.replace(':', '');
+  login(user): any {
+    return this.http.post('api/auth/login', user, {observe: 'response'}).pipe(map(response => response));
+  }
+
+  getToken(): string {
+    const currentUser = JSON.parse(localStorage.getItem('loggedUser'));
+    if (currentUser !== null) {
+      currentUser.token = currentUser.token.replace(':', '');
+    }
+    const token = currentUser && currentUser.token;
+    return token ? token : '';
+  }
+
+  getLoggedUserType() {
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+    let userRole;
+    if (user === null) {
+      userRole = '';
+    } else {
+      for (const role of user.roles) {
+        if (role === 'ADMIN') {
+          userRole = 'ADMIN';
         }
-        const token = currentUser && currentUser.token;
-        return token ? token : '';
+      }
     }
+    return userRole;
+  }
 
-    getLoggedUserType() {
-        const user = JSON.parse(localStorage.getItem('loggedUser'));
-        let userRole;
-        if (user === null) {
-            userRole = '';
-        } else {
-            for (const role of user.roles) {
-                if (role === 'ADMIN') {
-                    userRole = 'ADMIN';
-                }
-            }
-        }
-        return userRole;
+  isLoggedIn() {
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+
+    if (user === null) {
+      return false;
     }
-
-    isLoggedIn() {
-        const user = JSON.parse(localStorage.getItem('loggedUser'));
-
-        if (user === null) {
-            return false;
-        }
-        const expiredDate = new Date(new Date(parseInt(user.exp, 10) * 1000));
-        const nowDate = new Date();
-        if ((expiredDate.getDate() <= nowDate.getDate()) &&
-            (expiredDate.getTime() <= nowDate.getTime())) {
-            this.logout();
-            return false;
-        }
-        return true;
-
+    const expiredDate = new Date(new Date(parseInt(user.exp, 10) * 1000));
+    const nowDate = new Date();
+    if ((expiredDate.getDate() <= nowDate.getDate()) &&
+      (expiredDate.getTime() <= nowDate.getTime())) {
+      this.logout();
+      return false;
     }
+    return true;
 
-    getUserByUsername(username): any {
-        return this.http.get('api/users/'.concat(username));
-    }
+  }
 
-    logout() {
-        localStorage.clear();
-        this.router.navigate(['/login']);
-    }
+  getUserByUsername(username): any {
+    return this.http.get('api/users/'.concat(username));
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
 
 }

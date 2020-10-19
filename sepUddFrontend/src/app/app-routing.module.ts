@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {LoginPageComponent} from './component/login-page/login-page.component';
@@ -9,14 +9,13 @@ import {ChooseSearchTypeComponent} from './component/choose-search-type/choose-s
 import {AdvancedSearchComponent} from "./component/choose-search-type/advanced-search/advanced-search.component";
 
 
-
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent},
-  { path: 'workData', component: WorkDataPageComponent},
-  { path: 'search/:searchType', component: SearchPageComponent},
-  { path: 'searchType', component: ChooseSearchTypeComponent},
-  { path: 'advancedSearch', component: AdvancedSearchComponent}
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'login', component: LoginPageComponent},
+  {path: 'workData', component: WorkDataPageComponent},
+  {path: 'search/:searchType', component: SearchPageComponent},
+  {path: 'searchType', component: ChooseSearchTypeComponent},
+  {path: 'advancedSearch', component: AdvancedSearchComponent}
 
 ];
 
@@ -24,4 +23,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), FormsModule, CommonModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

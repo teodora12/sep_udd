@@ -9,8 +9,7 @@ export class WorkDataDTO {
   public keyTerms: string;
   public authors: string;
 
-  constructor(
-  ) {
+  constructor() {
   }
 
 

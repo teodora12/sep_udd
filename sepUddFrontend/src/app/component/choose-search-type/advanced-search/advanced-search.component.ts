@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WorkService} from '../../../service/work.service';
 import {FormGroup} from '@angular/forms';
 
@@ -33,7 +33,8 @@ export class AdvancedSearchComponent implements OnInit {
   private scientificFields = '';
   private text = '';
 
-  constructor(private workService: WorkService) { }
+  constructor(private workService: WorkService) {
+  }
 
   ngOnInit() {
 
@@ -97,7 +98,7 @@ export class AdvancedSearchComponent implements OnInit {
 
   }
 
-  back(){
+  back() {
     this.showResults = false;
   }
 
@@ -108,14 +109,14 @@ export class AdvancedSearchComponent implements OnInit {
     this.workService.downloadWork(id).subscribe(
       res => {
         var blob = new Blob([res], {type: 'application/pdf'});
-        var url= window.URL.createObjectURL(blob);
+        var url = window.URL.createObjectURL(blob);
         window.open(url, "_blank");
       }, err => {
         alert("Error while download file");
       }
     );
 
-    
+
   }
 
 

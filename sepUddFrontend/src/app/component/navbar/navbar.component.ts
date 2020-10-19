@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {MagazineService} from "../../service/magazine.service";
@@ -13,10 +13,11 @@ export class NavbarComponent implements OnInit {
   userRole: any;
   user: any;
 
-  constructor( private router: Router, private userService: UserService, private magazineService: MagazineService) { }
+  constructor(private router: Router, private userService: UserService, private magazineService: MagazineService) {
+  }
 
   ngOnInit() {
- //   this.userRole = this.userService.getLoggedUserType();
+    //   this.userRole = this.userService.getLoggedUserType();
 
     const user = JSON.parse(localStorage.getItem('loggedUser'));
     if (user === null) {

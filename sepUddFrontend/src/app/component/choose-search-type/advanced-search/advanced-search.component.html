@@ -1,21 +1,25 @@
 <div *ngIf="showResults && works.length != 0">
-  <div *ngFor="let val of works"  class="col-md-11 my-3 offset-md-1 mx-auto">
+  <div *ngFor="let val of works" class="col-md-11 my-3 offset-md-1 mx-auto">
     <div class="card">
       <h5 class="card-header">{{val.title}}</h5>
-      <div class="card-body" >
-        <h5 class="card-title">Časopis:</h5><p class="card-text">{{val.journalTitle}}</p>
-        <h5 class="card-title">Apstrakt:</h5><p class="card-text">{{val.abstr}}</p>
-        <h5 class="card-title">Autori:</h5><p class="card-text">{{val.authors}}</p>
-        <h5 class="card-title">Sažetak:</h5><p class="card-text" [innerHtml]="val.highlight"></p>
-        <button  (click)="downloadPdf(val.id)" class="btn btn-primary offset-md-10">Preuzmi</button>
-        <!--<button *ngIf="!val.openAccess" (click)="kupiRad(val.id)" class="btn btn-primary offset-md-10">Kupi</button>-->
+      <div class="card-body">
+        <h5 class="card-title">Časopis:</h5>
+        <p class="card-text">{{val.journalTitle}}</p>
+        <h5 class="card-title">Apstrakt:</h5>
+        <p class="card-text">{{val.abstr}}</p>
+        <h5 class="card-title">Autori:</h5>
+        <p class="card-text">{{val.authors}}</p>
+        <h5 class="card-title">Sažetak:</h5>
+        <p class="card-text" [innerHtml]="val.highlight"></p>
+        <button (click)="downloadPdf(val.id)" class="btn btn-primary offset-md-10">Preuzmi</button>
       </div>
     </div>
   </div>
 </div>
 <div *ngIf="showResults && works.length == 0" class="col-md-11 my-3 offset-md-1 mx-auto">
   <div class="card">
-    <h5 class="card-header" style="text-align: center;">Trenutno nema radova koji ispunjavaju zadate parametre pretrage.</h5>
+    <h5 class="card-header" style="text-align: center;">Trenutno nema radova koji ispunjavaju zadate parametre
+      pretrage.</h5>
   </div>
 </div>
 <button *ngIf="showResults" class="btn btn-primary offset-md-1" (click)="back()">Nazad</button>
@@ -28,58 +32,90 @@
   <div class="col-md-6 offset-md-3">
     <div class="form-group">
       <label for="journalTitle">Po nazivu časopisa:</label>
-      <input id="journalTitle" name="journalTitle" [(ngModel)]="journalTitle"  type="text" class="form-control">
+      <input id="journalTitle" name="journalTitle" [(ngModel)]="journalTitle" type="text" class="form-control">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="exampleFormControlInput1">fraza</label>
+      <input id="exampleFormControlInput1" type="checkbox" class="form-control" name="checkbox"
+             [(ngModel)]="phraseJournalTitle" style="width: 1.85rem; height: 1.85rem;" value="Pretrazuj kao frazu?">
     </div>
     <div class="form-group">
-      <input [(ngModel)]="journalTitleChecked" checked type="radio" id="nazivCasopisaOznacenAND" name="nazivCasopisaOznacen" value=true>
-      <label for="nazivCasopisaOznacenAND">AND</label><br>
-      <input [(ngModel)]="journalTitleChecked" type="radio" id="nazivCasopisaOznacenOR" name="nazivCasopisaOznacen" value=false>
-      <label for="nazivCasopisaOznacenOR">OR</label><br>
+      <input [(ngModel)]="journalTitleChecked" checked type="radio" id="nazivCasopisaOznacenAND"
+             name="nazivCasopisaOznacen" value=true>
+      <label for="nazivCasopisaOznacenAND">must</label><br>
+      <input [(ngModel)]="journalTitleChecked" type="radio" id="nazivCasopisaOznacenOR" name="nazivCasopisaOznacen"
+             value=false>
+      <label for="nazivCasopisaOznacenOR">should</label><br>
     </div>
     <div class="form-group">
       <label for="title">Po naslovu rada:</label>
-      <input id="title" name="title" [(ngModel)]="title"  type="text" class="form-control" >
+      <input id="title" name="title" [(ngModel)]="title" type="text" class="form-control">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="exampleFormControlInput1">fraza</label>
+      <input id="exampleFormControlInput1" type="checkbox" class="form-control" name="checkbox"
+             [(ngModel)]="phraseTitle" style="width: 1.85rem; height: 1.85rem;" value="Pretrazuj kao frazu?">
     </div>
     <div class="form-group">
-      <input [(ngModel)]="titleChecked" checked type="radio" id="naslovRadaOznacenAND" name="naslovRadaOznacen" value=true>
-      <label for="naslovRadaOznacenAND">AND</label><br>
+      <input [(ngModel)]="titleChecked" checked type="radio" id="naslovRadaOznacenAND" name="naslovRadaOznacen"
+             value=true>
+      <label for="naslovRadaOznacenAND">must</label><br>
       <input [(ngModel)]="titleChecked" type="radio" id="naslovRadaOznacenOR" name="naslovRadaOznacen" value=false>
-      <label for="naslovRadaOznacenOR">OR</label><br>
+      <label for="naslovRadaOznacenOR">should</label><br>
     </div>
-    <div  class="form-group">
+    <div class="form-group">
       <label for="authors">Po autorima:</label>
-      <input id="authors" name="authors" [(ngModel)]="authors"  type="text" class="form-control" >
+      <input id="authors" name="authors" [(ngModel)]="authors" type="text" class="form-control">
     </div>
-    <div  class="form-group">
+    <div class="form-group col-md-5">
+      <label for="exampleFormControlInput1">fraza</label>
+      <input id="exampleFormControlInput1" type="checkbox" class="form-control" name="checkbox"
+             [(ngModel)]="phraseAuthors" style="width: 1.85rem; height: 1.85rem;" value="Pretrazuj kao frazu?">
+    </div>
+    <div class="form-group">
       <input [(ngModel)]="authorsChecked" checked type="radio" id="autoriOznaceniAND" name="autoriOznaceni" value=true>
-      <label for="autoriOznaceniAND">AND</label><br>
+      <label for="autoriOznaceniAND">must</label><br>
       <input [(ngModel)]="authorsChecked" type="radio" id="autoriOznaceniOR" name="autoriOznaceni" value=false>
-      <label for="autoriOznaceniOR">OR</label><br>
+      <label for="autoriOznaceniOR">should</label><br>
     </div>
     <div class="form-group">
       <label for="keyTerms">Po ključnim pojmovima:</label>
-      <input id="keyTerms" name="keyTerms" [(ngModel)]="keyTerms"  type="text" class="form-control" >
+      <input id="keyTerms" name="keyTerms" [(ngModel)]="keyTerms" type="text" class="form-control">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="exampleFormControlInput1">fraza</label>
+      <input id="exampleFormControlInput1" type="checkbox" class="form-control" name="checkbox"
+             [(ngModel)]="phraseKeyTerms" style="width: 1.85rem; height: 1.85rem;" value="Pretrazuj kao frazu?">
     </div>
     <div class="form-group">
-      <input [(ngModel)]="keyTermsChecked" checked type="radio" id="kljucniPojmoviOznaceniAND" name="kljucniPojmoviOznaceni" value=true>
-      <label for="kljucniPojmoviOznaceniAND">AND</label><br>
-      <input [(ngModel)]="keyTermsChecked" type="radio" id="kljucniPojmoviOznaceniOR" name="kljucniPojmoviOznaceni" value=false>
-      <label for="kljucniPojmoviOznaceniOR">OR</label><br>
+      <input [(ngModel)]="keyTermsChecked" checked type="radio" id="kljucniPojmoviOznaceniAND"
+             name="kljucniPojmoviOznaceni" value=true>
+      <label for="kljucniPojmoviOznaceniAND">must</label><br>
+      <input [(ngModel)]="keyTermsChecked" type="radio" id="kljucniPojmoviOznaceniOR" name="kljucniPojmoviOznaceni"
+             value=false>
+      <label for="kljucniPojmoviOznaceniOR">should</label><br>
     </div>
     <div class="form-group">
       <label for="text">Po sadržaju:</label>
-      <textarea id="text" name="text" [(ngModel)]="text"  type="text" class="form-control"></textarea>
+      <textarea id="text" name="text" [(ngModel)]="text" type="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="exampleFormControlInput1">fraza</label>
+      <input id="exampleFormControlInput1" type="checkbox" class="form-control" name="checkbox" [(ngModel)]="phraseText"
+             style="width: 1.85rem; height: 1.85rem;" value="Pretrazuj kao frazu?">
     </div>
     <div class="form-group">
       <input [(ngModel)]="textChecked" checked type="radio" id="sadrzajOznacenAND" name="sadrzajOznacen" value=true>
-      <label for="sadrzajOznacenAND">AND</label><br>
-      <input [(ngModel)]="textChecked" type="radio" id="sadrzajOznacenOR" name="sadrzajOznacen" value=false placeholder="aa">
-      <label for="sadrzajOznacenOR">OR</label><br>
+      <label for="sadrzajOznacenAND">must</label><br>
+      <input [(ngModel)]="textChecked" type="radio" id="sadrzajOznacenOR" name="sadrzajOznacen" value=false
+             placeholder="aa">
+      <label for="sadrzajOznacenOR">should</label><br>
     </div>
     <div *ngIf="false" class="form-group">
       <label for="scientificFields">Po naučnim oblastima:</label>
-      <select id="scientificFields" name="scientificFields" multiple [(ngModel)]="scientificFields" class="form-control">
-        <option  value=0>Bez filtera za naucne oblasti!</option>
+      <select id="scientificFields" name="scientificFields" multiple [(ngModel)]="scientificFields"
+              class="form-control">
+        <option value=0>Bez filtera za naucne oblasti!</option>
         <option *ngFor="let val of scientificFieldsList" value={{val}}>
           {{val}}
         </option>

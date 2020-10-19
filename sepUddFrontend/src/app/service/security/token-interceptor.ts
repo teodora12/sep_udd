@@ -7,15 +7,16 @@ import {UserService} from '../user.service';
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
 
-    constructor(private inj: Injector) {}
+  constructor(private inj: Injector) {
+  }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const accountService: UserService = this.inj.get(UserService);
-        req = req.clone({
-            setHeaders: {
-                Authorization : `${accountService.getToken()}`
-            }
-        });
-        return next.handle(req);
-    }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const accountService: UserService = this.inj.get(UserService);
+    req = req.clone({
+      setHeaders: {
+        Authorization: `${accountService.getToken()}`
+      }
+    });
+    return next.handle(req);
+  }
 }
