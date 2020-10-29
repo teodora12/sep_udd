@@ -1,5 +1,7 @@
 package com.ftn.sep_udd.dto;
 
+import com.ftn.sep_udd.model.Magazine;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +9,21 @@ public class MagazineDTO {
 
     private Long id;
     private String title;
+    private String wayOfPayment;
+    private boolean openAccess;
     private List<ScientificFieldDTO> scientificFields;
 
     public MagazineDTO() {
         this.scientificFields = new ArrayList<>();
+    }
+
+    public MagazineDTO(Magazine magazine){
+        this.id = magazine.getId();
+        this.title = magazine.getTitle();
+        if(!magazine.getWayOfPayment().equals("")) {
+            this.wayOfPayment = magazine.getWayOfPayment();
+        }
+        this.openAccess = magazine.isOpenAccess();
     }
 
     public MagazineDTO(Long id, String title) {
@@ -25,12 +38,28 @@ public class MagazineDTO {
         this.scientificFields = scientificFields;
     }
 
+    public boolean isOpenAccess() {
+        return openAccess;
+    }
+
+    public void setOpenAccess(boolean openAccess) {
+        this.openAccess = openAccess;
+    }
+
     public List<ScientificFieldDTO> getScientificFields() {
         return scientificFields;
     }
 
     public void setScientificFields(List<ScientificFieldDTO> scientificFields) {
         this.scientificFields = scientificFields;
+    }
+
+    public String getWayOfPayment() {
+        return wayOfPayment;
+    }
+
+    public void setWayOfPayment(String wayOfPayment) {
+        this.wayOfPayment = wayOfPayment;
     }
 
     public Long getId() {

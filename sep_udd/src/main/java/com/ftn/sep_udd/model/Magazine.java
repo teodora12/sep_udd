@@ -42,6 +42,9 @@ public class Magazine implements Serializable {
     @OneToMany
     private Set<Work> works;
 
+    @Column
+    private double price;
+
 
     public Magazine() {
         this.works = new HashSet<>();
@@ -91,6 +94,14 @@ public class Magazine implements Serializable {
 
     public Set<ScientificField> getScientificFields() {
         return scientificFields;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setScientificFields(Set<ScientificField> scientificFields) {

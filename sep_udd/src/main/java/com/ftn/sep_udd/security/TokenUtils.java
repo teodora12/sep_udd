@@ -3,8 +3,11 @@ package com.ftn.sep_udd.security;
 import com.ftn.sep_udd.common.TimeProvider;
 import com.ftn.sep_udd.model.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,14 +18,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class TokenUtils {
 
     @Value("spring-security-demo")
     private String APP_NAME;
 
-    @Value("somesecret")
-    public String SECRET;
+//    @Value("somesecret")
+//    public String SECRET;
 
     @Value("50000")
     private int EXPIRES_IN;
@@ -40,6 +44,33 @@ public class TokenUtils {
     TimeProvider timeProvider;
 
     private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
+
+    public static final String SECRET = "somesecret";
+
+    private static final String PREFIX = "Bearer ";
+
+
+    public static String getEmailFromToken(String wholeToken){
+        if (wholeToken != null && wholeToken.startsWith(PREFIX)) {
+            String token = wholeToken.substring(PREFIX.length(), wholeToken.length());
+
+            try {
+                Claims body = Jwts.parser()
+                        .setSigningKey(SECRET)
+                        .parseClaimsJws(token)
+                        .getBody();
+
+                return body.getSubject();
+
+            } catch (JwtException | ClassCastException e) {
+                log.error("Error while parsing jwt");
+                throw e;
+            }
+        }
+        log.error("Error while parsing jwt");
+        return null;
+    }
+
 
     // Functions for generating new JWT token
 
