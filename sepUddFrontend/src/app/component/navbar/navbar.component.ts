@@ -21,8 +21,10 @@ export class NavbarComponent implements OnInit {
 
     const user = JSON.parse(localStorage.getItem('loggedUser'));
     if (user === null) {
+      console.log('user je null');
       this.userRole = '';
     } else {
+      console.log('user nije null');
       for (const role of user.roles) {
         if (role.authority === 'ADMIN') {
           this.userRole = 'ROLE_ADMIN';
@@ -30,6 +32,10 @@ export class NavbarComponent implements OnInit {
           this.userRole = 'ROLE_AUTHOR';
         } else if (role.authority === 'MAIN_REDACTOR') {
           this.userRole = 'ROLE_MAINREDACTOR';
+        } else if (role.authority === 'USER_ROLE') {
+          this.userRole = 'ROLE_USER';
+        } else if(role.authority === 'REDACTOR') {
+          this.userRole = 'ROLE_REDACTOR';
         }
       }
     }

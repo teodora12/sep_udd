@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-3"></div>
+    <div class="col-md-6">
+      <!--<form name="registerForm" #f="ngForm" (submit)="choose(f.value,f)"  novalidate class="form-signin">-->
+
+        <h2 class="form-signin-heading">Magazines</h2>
+        <br/>
+
+        <div *ngFor="let magazine of magazines">
+          <div class="form-group list-group-item">
+
+            <label> {{magazine['title']}}  </label>
+            <br/>
+            <small> {{magazine['title']}} </small>
+            <br/>
+            <!--<input type="text" class="form-control" name={{field.id}} ngModel *ngIf="field.type.name=='string'" />-->
+            <!--<input type="checkbox"  name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">-->
+            <!--<input type="number" class="form-control" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">-->
+            <!--<select [(ngModel)]="choosenMagazine" name="title" class="form-control" *ngIf="field.type.name=='enum'">-->
+              <!--<option *ngFor="let val of enumValues" value={{val}}>-->
+                <!--{{val}}-->
+              <!--</option>-->
+            <!--</select>-->
+            <div>
+            <button type="submit" *ngIf="magazine['openAccess'] === false"  class="btn btn-sm btn-primary pull-right" (click)="buyMagazine(magazine.id)">
+              <i class="fa fa-envelope-o"></i>
+              <span> Buy</span>
+            </button>
+            <button type="submit" *ngIf="magazine['openAccess'] === true"  class="btn btn-sm btn-primary pull-right" (click)="downloadMagazine(magazine['id'])">
+              <i class="fa fa-envelope-o"></i>
+              <span> Download</span>
+            </button>
+            </div>
+          </div>
+        </div>
+
+
+
+      <!--</form>-->
+    </div>
+    <div class="offset-3"></div>
+  </div>
+</div>

@@ -33,6 +33,7 @@ export class LoginPageComponent implements OnInit {
   login() {
     this.wrongUsernameOrPass = false;
     const headers = new Headers();
+    console.log('login usao');
     this.userService.login(this.user).subscribe(value => {
       headers.append('Authorization', value.headers.get('Authorization'));
       const userFromToken = this.jwtHelper.decodeToken(headers.get('Authorization'));
