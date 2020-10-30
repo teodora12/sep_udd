@@ -8,6 +8,7 @@ import {SearchPageComponent} from './component/search-page/search-page.component
 import {ChooseSearchTypeComponent} from './component/choose-search-type/choose-search-type.component';
 import {AdvancedSearchComponent} from './component/choose-search-type/advanced-search/advanced-search.component';
 import {AllMagazinesComponent} from './component/all-magazines/all-magazines.component';
+import {ViewWorksPageComponent} from './component/all-magazines/view-works-page/view-works-page.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'search/:searchType', component: SearchPageComponent},
   {path: 'searchType', component: ChooseSearchTypeComponent},
   {path: 'advancedSearch', component: AdvancedSearchComponent},
-  {path: 'chooseMagazines', component: AllMagazinesComponent}
+  {path: 'chooseMagazines', component: AllMagazinesComponent},
+  {path: 'magazine/:id', component: ViewWorksPageComponent}
 
 ];
 

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-3"></div>
+    <div class="col-md-6">
+      <!--<form name="registerForm" #f="ngForm" (submit)="choose(f.value,f)"  novalidate class="form-signin">-->
+
+      <h2 class="form-signin-heading">Details</h2>
+      <br/>
+
+      <div *ngFor="let work of works">
+        <div class="form-group list-group-item">
+
+          <label> {{work['title']}}  </label>
+          <br/>
+          <small> {{work['abstr']}} </small>
+          <br/>
+
+          <div>
+            <button type="submit" *ngIf="work['magazineOpenAccess'] === false && work['paid'] === false"  class="btn btn-sm btn-primary pull-right" (click)="buyWork(work.id)">
+              <i class="fa fa-envelope-o"></i>
+              <span> Buy</span>
+            </button>
+            <button type="submit" *ngIf="work['magazineOpenAccess'] === true || work['paid'] === true"  class="btn btn-sm btn-primary pull-right" (click)="downloadWork(work.id)">
+              <i class="fa fa-envelope-o"></i>
+              <span> Download</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--</form>-->
+    </div>
+    <div class="offset-3"></div>
+  </div>
+</div>

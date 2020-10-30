@@ -8,29 +8,19 @@
         <br/>
 
         <div *ngFor="let magazine of magazines">
-          <div class="form-group list-group-item">
+          <div class="form-group list-group-item" (click)="viewWorks(magazine.id)">
 
             <label> {{magazine['title']}}  </label>
             <br/>
             <small> {{magazine['title']}} </small>
             <br/>
-            <!--<input type="text" class="form-control" name={{field.id}} ngModel *ngIf="field.type.name=='string'" />-->
-            <!--<input type="checkbox"  name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">-->
-            <!--<input type="number" class="form-control" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">-->
-            <!--<select [(ngModel)]="choosenMagazine" name="title" class="form-control" *ngIf="field.type.name=='enum'">-->
-              <!--<option *ngFor="let val of enumValues" value={{val}}>-->
-                <!--{{val}}-->
-              <!--</option>-->
-            <!--</select>-->
+
             <div>
-            <button type="submit" *ngIf="magazine['openAccess'] === false"  class="btn btn-sm btn-primary pull-right" (click)="buyMagazine(magazine.id)">
+            <button type="submit" *ngIf="magazine['openAccess'] === false && magazine['paid'] === false "  class="btn btn-sm btn-primary pull-right" (click)="buyMagazine(magazine.id)">
               <i class="fa fa-envelope-o"></i>
               <span> Buy</span>
             </button>
-            <button type="submit" *ngIf="magazine['openAccess'] === true"  class="btn btn-sm btn-primary pull-right" (click)="downloadMagazine(magazine['id'])">
-              <i class="fa fa-envelope-o"></i>
-              <span> Download</span>
-            </button>
+
             </div>
           </div>
         </div>

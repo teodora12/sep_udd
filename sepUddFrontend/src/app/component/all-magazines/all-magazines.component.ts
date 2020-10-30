@@ -39,7 +39,6 @@ export class AllMagazinesComponent implements OnInit {
 
       this.magazineService.complete(res.url).subscribe(ret => {
         console.log('success');
-        this.toastr.successToastr('Payment succeded!');
       }, err => {
         console.log('complete error ');
       });
@@ -54,7 +53,7 @@ export class AllMagazinesComponent implements OnInit {
     });
   }
 
-  downloadMagazine(magazineId: any) {
-    
+  viewWorks(magazineId: any) {
+    this.router.navigate(['/magazine', magazineId]);
   }
 }

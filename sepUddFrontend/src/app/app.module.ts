@@ -16,6 +16,7 @@ import {AdvancedSearchComponent} from './component/choose-search-type/advanced-s
 import { AllMagazinesComponent } from './component/all-magazines/all-magazines.component';
 import {CanActivateService} from "./service/security/can-activate.service";
 import {TokenInterceptorService} from "./service/security/token-interceptor";
+import { ViewWorksPageComponent } from './component/all-magazines/view-works-page/view-works-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {TokenInterceptorService} from "./service/security/token-interceptor";
     SearchPageComponent,
     ChooseSearchTypeComponent,
     AdvancedSearchComponent,
-    AllMagazinesComponent
+    AllMagazinesComponent,
+    ViewWorksPageComponent
   ],
   imports: [
     BrowserModule,
