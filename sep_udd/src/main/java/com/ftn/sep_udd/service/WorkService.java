@@ -2,6 +2,7 @@ package com.ftn.sep_udd.service;
 
 import com.ftn.sep_udd.dto.WorkDataDTO;
 import com.ftn.sep_udd.model.Work;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,4 +20,5 @@ public interface WorkService {
     public void savePdf(WorkDataDTO work);
 
 
+    HttpEntity buyWork(Integer id, String email);
 }

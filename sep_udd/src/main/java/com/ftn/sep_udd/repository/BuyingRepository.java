@@ -9,4 +9,6 @@ public interface BuyingRepository extends JpaRepository<Buying, Long> {
 
     Buying findBuyingByProductId(Long id);
     Buying findBuyingById(Long id);
+    Buying findBuyingByProductIdAndProductType(Long id, String type);
+    void deleteBuyingById(Long id);
 }

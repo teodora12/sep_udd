@@ -43,9 +43,10 @@ insert into key_term (id, name) values (5, 'kljucnarec5');
 insert into key_term (id, name) values (6, 'kljucnarec6');
 
 
-insert into work (id, abstr, pdf, title, scientific_field_id) values (1,'abstr','fajl.pdf','naslov rada',1);
-insert into work (id, abstr, pdf, title, scientific_field_id) values (2,'abstract','file.pdf','naslov rada!!',2);
-insert into work (id, abstr, pdf, title, scientific_field_id) values (3,'abstract','filee.pdf','naslov rada....',4);
+insert into work (id, abstr, pdf, title, scientific_field_id, price) values (1,'abstr','fajl.pdf','Rashladne vitrine',1, 5);
+insert into work (id, abstr, pdf, title, scientific_field_id, price) values (2,'abstract','file.pdf','Radni stolove',2, 6);
+insert into work (id, abstr, pdf, title, scientific_field_id, price) values (3,'opis','filee.pdf','Profesionalne inox sudopere',4, 7);
+insert into work (id, abstr, pdf, title, scientific_field_id, price) values (4,'abstract','fil.pdf','Izrada rashladne komore',4, 8);
 
 
 insert into work_key_terms (work_id, key_terms_id) values (1,1);
@@ -54,6 +55,7 @@ insert into work_key_terms (work_id, key_terms_id) values (1,3);
 insert into work_key_terms (work_id, key_terms_id) values (1,4);
 insert into work_key_terms (work_id, key_terms_id) values (1,5);
 insert into work_key_terms (work_id, key_terms_id) values (2,6);
+insert into work_key_terms (work_id, key_terms_id) values (3,1);
 
 
 /*insert into work_users (work_id, users_id) values (1,3);
@@ -72,9 +74,9 @@ insert into user_authority(user_id, authority_id) VALUES (6,5);
 insert into user_authority(user_id, authority_id) VALUES (7,6);
 
 
-insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (1, null ,true,'MAGAZIN','', false, 12 );
-insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (2, null ,true,'MAGAZIN2','banka', true, 13 );
-insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (3, null ,true,'casopis','banka', false, 14 );
+insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (1, null ,true,'Rashladni i termicki uredjaji','paypal', false, 12 );
+insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (2, null ,true,'Neutralni inox elementi','paypal', false, 13 );
+insert into magazine (id, date, is_active, title, way_of_payment, is_open_access, price) values (3, null ,true,'Rashladne komore','', true, 14 );
 
 
 
@@ -100,3 +102,4 @@ insert into magazine_users (magazine_id, users_id) values (2,7);
 insert into magazine_works (magazine_id, works_id) values (1,1);
 insert into magazine_works (magazine_id, works_id) values (2,2);
 insert into magazine_works (magazine_id, works_id) values (2,3);
+insert into magazine_works (magazine_id, works_id) values (3,4);

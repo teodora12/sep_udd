@@ -17,8 +17,8 @@ public class Buying {
     @Column
     private String status;
 
-//    @Column
-//    private String typeOfProduct;
+    @Column
+    private String productType;
 
     public Buying() {
     }
@@ -47,11 +47,11 @@ public class Buying {
         this.status = status;
     }
 
-//    public String getTypeOfProduct() {
-//        return typeOfProduct;
-//    }
-//
-//    public void setTypeOfProduct(String typeOfProduct) {
-//        this.typeOfProduct = typeOfProduct;
-//    }
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 }

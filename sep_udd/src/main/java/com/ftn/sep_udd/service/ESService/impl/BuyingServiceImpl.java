@@ -24,6 +24,11 @@ public class BuyingServiceImpl implements BuyingService {
     }
 
     @Override
+    public Buying findBuyingByProductIdAndProductType(Long id, String productType) {
+        return this.buyingRepository.findBuyingByProductIdAndProductType(id, productType);
+    }
+
+    @Override
     public void changeStatus(Long id, String status) {
         Buying buying = this.buyingRepository.findBuyingById(id);
         if(buying != null) {

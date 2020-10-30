@@ -8,6 +8,8 @@ public interface BuyingService {
 
     void save(Buying buying);
     Buying findBuyingByMagazineId(Long id);
+    Buying findBuyingByProductIdAndProductType(Long id, String productType);
     void changeStatus(Long id, String status);
+
 
 }

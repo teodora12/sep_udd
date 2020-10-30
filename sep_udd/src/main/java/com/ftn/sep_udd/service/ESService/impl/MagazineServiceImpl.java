@@ -33,6 +33,11 @@ public class MagazineServiceImpl implements MagazineService {
     private BuyingService buyingService;
 
     @Override
+    public Magazine findMagazineById(Long id) {
+        return this.magazineRepository.findMagazineById(id);
+    }
+
+    @Override
     public HttpEntity buyMagazine(Long id, String email) {
 
         User user = this.userService.findUserByEmail(email);
@@ -47,6 +52,7 @@ public class MagazineServiceImpl implements MagazineService {
         Buying buying = new Buying();
         buying.setStatus("NEW");
         buying.setProductId(magazine.getId());
+        buying.setProductType("MAGAZINE");
         this.buyingService.save(buying);
 
         buyMagazineDTO.setProductId(id);

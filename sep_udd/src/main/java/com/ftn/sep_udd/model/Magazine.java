@@ -1,5 +1,7 @@
 package com.ftn.sep_udd.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -39,7 +41,7 @@ public class Magazine implements Serializable {
     @Column
     private boolean isOpenAccess;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Work> works;
 
     @Column

@@ -2,6 +2,7 @@ package com.ftn.sep_udd.controller;
 
 import com.ftn.sep_udd.dto.MagazineDTO;
 import com.ftn.sep_udd.dto.WorkDataDTO;
+import com.ftn.sep_udd.model.Buying;
 import com.ftn.sep_udd.security.TokenUtils;
 import com.ftn.sep_udd.service.BuyingService;
 import com.ftn.sep_udd.service.MagazineService;
@@ -36,6 +37,19 @@ public class MagazineController {
     public ResponseEntity getAll() {
 
         List<MagazineDTO> magazineDTOS = this.magazineService.getAllMagazines();
+
+
+        for(MagazineDTO magazineDTO: magazineDTOS){
+            Buying buying = this.buyingService.findBuyingByProductIdAndProductType(magazineDTO.getId(), "MAGAZINE");
+            if(buying != null){
+                if(buying.getStatus().equals("PAID")){
+                    magazineDTO.setPaid(true);
+                } else {
+                    magazineDTO.setPaid(false);
+                }
+            }
+        }
+
         if(magazineDTOS.isEmpty()){
             return ResponseEntity.notFound().build();
         }
@@ -74,6 +88,7 @@ public class MagazineController {
     public void cancelOrder(@PathVariable Long id){
 
         this.buyingService.changeStatus(id, "CANCELLED");
+
     }
 
 

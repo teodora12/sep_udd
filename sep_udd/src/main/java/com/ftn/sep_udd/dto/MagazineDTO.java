@@ -12,6 +12,7 @@ public class MagazineDTO {
     private String wayOfPayment;
     private boolean openAccess;
     private List<ScientificFieldDTO> scientificFields;
+    private boolean paid;
 
     public MagazineDTO() {
         this.scientificFields = new ArrayList<>();
@@ -48,6 +49,14 @@ public class MagazineDTO {
 
     public List<ScientificFieldDTO> getScientificFields() {
         return scientificFields;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public void setScientificFields(List<ScientificFieldDTO> scientificFields) {

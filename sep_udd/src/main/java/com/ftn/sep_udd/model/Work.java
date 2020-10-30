@@ -37,6 +37,9 @@ public class Work implements Serializable {
     @ManyToMany
     private Set<User> users;
 
+    @Column
+    private double price;
+
     public Work() {
         this.keyTerms = new HashSet<>();
         this.users = new HashSet<>();

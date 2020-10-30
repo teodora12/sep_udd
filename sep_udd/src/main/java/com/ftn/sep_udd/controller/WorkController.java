@@ -3,14 +3,13 @@ package com.ftn.sep_udd.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ftn.sep_udd.dto.CombinedSearchDTO;
-import com.ftn.sep_udd.dto.ScientificFieldDTO;
-import com.ftn.sep_udd.dto.WorkDataDTO;
-import com.ftn.sep_udd.dto.WorkEsDTO;
+import com.ftn.sep_udd.dto.*;
+import com.ftn.sep_udd.model.Buying;
+import com.ftn.sep_udd.model.Magazine;
+import com.ftn.sep_udd.model.ScientificField;
 import com.ftn.sep_udd.model.Work;
-import com.ftn.sep_udd.service.ESWorkService;
-import com.ftn.sep_udd.service.ScientificFieldService;
-import com.ftn.sep_udd.service.WorkService;
+import com.ftn.sep_udd.security.TokenUtils;
+import com.ftn.sep_udd.service.*;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -20,7 +19,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/works", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +40,13 @@ public class WorkController {
     @Autowired
     private ScientificFieldService scientificFieldService;
 
+    @Autowired
+    private MagazineService magazineService;
+
+    private static final String PAYPAL_URI= "http://localhost:8090/api/payment";
+
+    @Autowired
+    private BuyingService buyingService;
 
     @PostMapping(value = "/submitWorkData")
     public ResponseEntity submitWorkData(@RequestBody WorkDataDTO dto) throws UnsupportedEncodingException {
@@ -48,9 +56,74 @@ public class WorkController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping(path = "/getWorks/{id}")
+    public ResponseEntity getWorks(@PathVariable Long id) {
+
+        Magazine magazine = this.magazineService.findMagazineById(id);
+        List<WorkDTO> workDTOS = new ArrayList<>();
+        for(Work w: magazine.getWorks()){
+            WorkDTO workDTO = new WorkDTO();
+            workDTO.setTitle(w.getTitle());
+            workDTO.setAbstr(w.getAbstr());
+            workDTO.setMagazineOpenAccess(magazine.isOpenAccess());
+            workDTO.setId(w.getId());
+
+            Buying buying = this.buyingService.findBuyingByProductIdAndProductType(Long.valueOf(w.getId()), "WORK");
+            if(buying != null){
+                if(buying.getStatus().equals("PAID")){
+                    workDTO.setPaid(true);
+                } else {
+                    workDTO.setPaid(false);
+                }
+            }
+            workDTOS.add(workDTO);
+        }
+        if(workDTOS.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        return new ResponseEntity(workDTOS, HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/buy/{id}")
+    public Map<String, String> buyWork(@PathVariable Integer id, @RequestHeader(value = "Authorization") String authorization){
+
+        String email = getEmailFromToken(authorization);
+
+        HttpEntity requestEntity = this.workService.buyWork(id,email);
+
+        if(requestEntity == null){
+            return (Map<String, String>) ResponseEntity.notFound().build();
+        }
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<String> resp = restTemplate.postForEntity(PAYPAL_URI + "/pay",requestEntity, String.class);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("url", resp.getBody());
+        System.out.println(resp.getBody() + " url");
+
+        return map;
+    }
+
+    public String getEmailFromToken (String authorization) {
+
+        String email = TokenUtils.getEmailFromToken(authorization);
+        if (email == null) {
+            try {
+                throw new Exception("Jwt error");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return email;
+    }
+
+
     @GetMapping(path = "/downloadWork/get/{id}")
     public @ResponseBody
-    ResponseEntity downloadRad(@PathVariable Integer id) throws IOException {
+    ResponseEntity downloadWork(@PathVariable Integer id) throws IOException {
 
         Work work = workService.findWorkById(id);
 
